@@ -41,15 +41,23 @@ public class TaskService {
     }
 
     public TaskEntity saveTaskWithUser(TaskEntity task, Long userId) {
-        UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        task.setUser(user); // Asociar la tarea al usuario
-        return taskRepository.save(task);
+        try {
+            UserEntity user = userRepository.findById(userId)
+                    .orElseThrow(() -> new RuntimeException("Usuario con ID " + userId + " no encontrado"));
+            task.setUser(user);
+            return taskRepository.save(task);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al guardar la tarea: " + e.getMessage());
+        }
     }
 
     public List<TaskEntity> getTasksByUser(long userId) {
-        UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        return taskRepository.findByUser(user);
+        try {
+            UserEntity user = userRepository.findById(userId)
+                    .orElseThrow(() -> new RuntimeException("Usuario con ID " + userId + " no encontrado"));
+            return taskRepository.findByUser(user);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener las tareas del usuario: " + e.getMessage());
+        }
     }
 }
