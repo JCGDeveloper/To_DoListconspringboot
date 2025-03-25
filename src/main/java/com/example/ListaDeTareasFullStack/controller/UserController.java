@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(path = "users")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class UserController {
     private final UserService userService;
 
@@ -18,7 +17,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
+   @GetMapping
     public List<UserEntity> getAllUsers() {
         return userService.getAllUsers();
     }

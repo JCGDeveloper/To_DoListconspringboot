@@ -1,31 +1,77 @@
-body{
-    margin : 0;
-    padding:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-.outer-container{
-    display:flex;
-    flex-direction:column;
-    background-color:aliceblue;
-    max-width:600px;
-    width:100%;
-}
-.outer-container form{
-    display:flex;
-    flex-direction :column;
-    width:100%;
-    gap:10px;
-}
-.outer-container form input{
-    border:1px solid black;
-    border-radius : 20px;
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
 }
 
-.outer-container form button{
-    border:1px solid black;
-        border-radius : 20px;
+.outer-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
+.outer-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.outer-container form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+}
+
+.outer-container form input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.outer-container form input:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+}
+
+.outer-container form button {
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #4facfe;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.outer-container form button:hover {
+    background-color: #00c6ff;
+    box-shadow: 0 4px 8px rgba(0, 198, 255, 0.3);
+}
+
+.outer-container a {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #4facfe;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.outer-container a:hover {
+    color: #00c6ff;
+}

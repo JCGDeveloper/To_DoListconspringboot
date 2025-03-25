@@ -10,6 +10,8 @@ public class TaskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id;
+
+    @Column(unique = true)
     private String descripcion;
 
     @ManyToOne
