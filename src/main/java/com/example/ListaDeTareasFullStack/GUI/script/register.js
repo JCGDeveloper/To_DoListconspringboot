@@ -26,7 +26,7 @@ async function registrarUser() {
 
         if (response.ok) {
             alert("Todo correcto");
-            location.reload();
+            window.location.href = "index.html";
         } else {
             alert("Error al registrar el usuario.");
         }
