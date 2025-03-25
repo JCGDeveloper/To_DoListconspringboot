@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping(path = "users")
@@ -18,22 +19,24 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserEntity> getAllUsers(){
-        return  userService.getAllUsers();
+    public List<UserEntity> getAllUsers() {
+        return userService.getAllUsers();
     }
 
     @GetMapping("/{id}")
-    public Optional<UserEntity> getUserById(@PathVariable long id){
-        return  userService.getUserById(id);
+    public Optional<UserEntity> getUserById(@PathVariable long id) {
+        return userService.getUserById(id);
     }
 
     @PostMapping
-    public UserEntity saveUser(@RequestBody UserEntity user){
-        return userService.saveUser(user);
+    public UserEntity saveUser(@RequestBody UserEntity user) {
+        return userService.registrarUser(user);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable long id){
+    public void deleteUser(@PathVariable long id) {
         userService.deleteUser(id);
     }
 }
+
+

@@ -1,11 +1,13 @@
 const inputText = document.getElementById('input-task')
 const createTask = document.getElementById('create-button')
 const ListaTareas = document.getElementById('Lista-Tareas')
-
 createTask.addEventListener('click',AgregarTarea)
 
 function CargarTareas() {
-    fetch("http://localhost:8080/tasks")
+    const userId = sessionStorage.getItem("userId");
+
+
+    fetch(`http://localhost:8080/tasks/user/`+userId)
         .then((response) => {
             if (!response.ok) {
                 throw new Error("httpError " + response.status);
@@ -20,7 +22,7 @@ function CargarTareas() {
             tasks.forEach((task) => {
                 const li = document.createElement("li");
                 li.textContent = task.descripcion; // Mostrar la descripción de la tarea
-                botonEliminar(li,task.id); // Agregar botón para eliminar la tarea
+                botonEliminar(li, task.id); // Agregar botón para eliminar la tarea
                 ListaTareas.appendChild(li);
             });
         })
@@ -28,13 +30,15 @@ function CargarTareas() {
             console.error("Error al cargar las tareas:", error);
         });
 }
-
 function AgregarTarea() {
+    const userId = sessionStorage.getItem("userId");
+
+
     const task = {
         descripcion: inputText.value
     };
 
-    fetch('http://localhost:8080/tasks', {
+    fetch(`http://localhost:8080/tasks/`+userId, {
         method: "POST",
         body: JSON.stringify(task),
         headers: {
@@ -52,6 +56,7 @@ function AgregarTarea() {
         console.error("Error al crear la tarea:", error);
     });
 }
+
 
 function botonEliminar(li, taskId) {
     const botonEliminar = document.createElement('button');
@@ -77,3 +82,6 @@ function botonEliminar(li, taskId) {
         });
     });
 }
+
+
+CargarTareas();

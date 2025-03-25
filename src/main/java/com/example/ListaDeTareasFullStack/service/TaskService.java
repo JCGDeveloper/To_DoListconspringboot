@@ -35,17 +35,21 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-    //asignar el user a la tarea
-    public TaskEntity asignUserToTask(long userid, long taskid){
-        //Buscamos el usuario por su id
-        UserEntity user = userRepository.findById(userid).orElseThrow(()->new RuntimeException("No se ha encontrado el usuario que has seleccionado"));
 
-        //Buscamos la tarea por su id
-        TaskEntity task = taskRepository.findById(taskid).orElseThrow(()->new RuntimeException("No se ha encontrado la tarea que has seleccionado"));
+    public List<TaskEntity> getTasksByUser(UserEntity user) {
+        return taskRepository.findByUser(user);
+    }
 
-        task.setUser(user);
-        user.getTaskes().add(task);
-
+    public TaskEntity saveTaskWithUser(TaskEntity task, Long userId) {
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        task.setUser(user); // Asociar la tarea al usuario
         return taskRepository.save(task);
+    }
+
+    public List<TaskEntity> getTasksByUser(long userId) {
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return taskRepository.findByUser(user);
     }
 }

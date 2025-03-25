@@ -1,5 +1,6 @@
 package com.example.ListaDeTareasFullStack.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private long id;
 
     @Column(unique = true)
@@ -21,5 +23,6 @@ public class UserEntity {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    private List<TaskEntity> taskes;
+    @JsonIgnore
+    private List<TaskEntity> tasks;
 }

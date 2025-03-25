@@ -1,7 +1,9 @@
 package com.example.ListaDeTareasFullStack.controller;
 
 import com.example.ListaDeTareasFullStack.entity.TaskEntity;
+import com.example.ListaDeTareasFullStack.entity.UserEntity;
 import com.example.ListaDeTareasFullStack.service.TaskService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/tasks")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class TaskController {
     private final TaskService taskService;
 
@@ -17,9 +18,9 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping
-    public List<TaskEntity> getAllTasks(){
-        return taskService.getAllTask();
+    @GetMapping("/user/{userId}")
+    public List<TaskEntity> getTasksByUser(@PathVariable Long userId) {
+        return taskService.getTasksByUser(userId);
     }
 
     @GetMapping("/{id}")
@@ -27,9 +28,9 @@ public class TaskController {
         return  taskService.getTaskById(id);
     }
 
-    @PostMapping
-    public TaskEntity saveTask(@RequestBody TaskEntity task){
-        return  taskService.saveTask(task);
+    @PostMapping("/{userId}")
+    public TaskEntity saveTask(@RequestBody TaskEntity task, @PathVariable Long userId) {
+        return taskService.saveTaskWithUser(task, userId);
     }
 
     @DeleteMapping("/{id}")
@@ -38,8 +39,5 @@ public class TaskController {
     }
 
 
-    @PutMapping("/{userId}/assign/{taskId}")
-    public TaskEntity asignUserToTask(@PathVariable long userId , @PathVariable long taskId){
-        return taskService.asignUserToTask(userId,taskId);
-    }
+
 }
